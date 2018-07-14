@@ -1,16 +1,49 @@
-/*
- * Create a list that holds all of your cards
- */
+//Create a list that holds all of your cards. Moved from HTML.
+ let cardArray = [
+  "fa fa-diamond",
+  "fa fa-diamond",
+  "fa fa-paper-plane-o",
+  "fa fa-paper-plane-o",
+  "fa fa-anchor",
+  "fa fa-anchor",
+  "fa fa-bolt",
+  "fa fa-bolt",
+  "fa fa-cube",
+  "fa fa-cube",
+  "fa fa-leaf",
+  "fa fa-leaf",
+  "fa fa-bicycle",
+  "fa fa-bicycle",
+  "fa fa-bomb",
+  "fa fa-bomb",
+];
+//code with Iip 1:1 7/8/18
+//could I have used map or filter?
+let cards = document.querySelectorAll(".card");
+let openCard = [];
 
+cards.forEach(function(el, idx) {
+	cards[idx].addEventListener('click', function(){
+		cards[idx].className = "card open show";
+        openCard.push(cards[idx]);
+        setTimeout(function() {
+            if(openCard.length == 2) {
+                if(openCard[0].firstElementChild.className == openCard[1].firstElementChild.className) {
+                    openCard[0].className = "card match";
+                    openCard[1].className = "card match";
+                }
+                else {
+                    openCard[0].className = "card";
+                    openCard[1].className = "card";
+                }
+                openCard = [];
+            }
+        },800);
+	});
+});
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
+//shuffle the list of cards using the provided "shuffle" method below
+//Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -24,8 +57,32 @@ function shuffle(array) {
 
     return array;
 }
+//code from 1:1 with Iip 7/8/18
+initGame();
+
+function initGame() {
+    let newCards = shuffle(cardArray);
+    cards.forEach(function(element, idx){
+        cards[idx].className = "card";
+        cards[idx].firstElementChild.className = newCards[idx];
+    });
+}
 
 
+
+//function to indicate game over
+
+
+
+//function to start the timer
+
+
+
+//function to stop the timer
+
+
+
+//increment the move counter and display it on the page
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
