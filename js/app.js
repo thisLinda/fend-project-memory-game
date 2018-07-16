@@ -22,10 +22,28 @@
 let cards = document.querySelectorAll(".card");
 let openCard = [];
 
+//function validMove...add a previousTarget variable???
 cards.forEach(function(el, idx) {
 	cards[idx].addEventListener('click', function(){
 		cards[idx].className = "card open show";
         openCard.push(cards[idx]);
+
+// filter out the card if it matches itself
+//code from dannygsmith, midwest cohort meeting
+/*
+if ( !openCard[ idx ].classList.contains( 'card' ) &&
+!openCard[ idx ].classList.contains( 'open' ) &&
+!openCard[ idx ].classList.contains( 'show' ) ) {
+console.log( "danny" );
+*/
+/*
+ // prevent more than two cards at a time
+ console.log( openCard.length );
+ if ( openCard.length < 2 ) {
+    openCard.push( idx );
+    cards[ idx ].classList.add( 'open' );
+    cards[ idx ].classList.add( 'show' );
+*/
         setTimeout(function() {
             if(openCard.length == 2) {
                 if(openCard[0].firstElementChild.className == openCard[1].firstElementChild.className) {
@@ -42,6 +60,11 @@ cards.forEach(function(el, idx) {
 	});
 });
 
+function disable(){
+    if(openCard.length == 2) && (openCard[].firstElementChild.className === openCard[].firstElementChild.className) {
+        openCard[].className = "card disabled";
+    }
+}
 //shuffle the list of cards using the provided "shuffle" method below
 //Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

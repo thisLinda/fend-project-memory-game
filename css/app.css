@@ -80,6 +80,14 @@ h1 {
     background: #02ccba;
     font-size: 33px;
 }
+/*
+* Disabled method to prevent card matching self from https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript#comments-section
+*/
+
+.deck .card.disabled {
+	pointer-events: none;
+	opacity: 0.9;
+}
 
 /*
  * Styles for the Score Panel
