@@ -1,4 +1,4 @@
-//Create a list that holds all of your cards. Moved from HTML.
+//Create a list that holds all of your cards. 
 let cardArray = [
     "fa fa-diamond",
     "fa fa-diamond",
@@ -19,15 +19,15 @@ let cardArray = [
 ];
 
 let cards = document.querySelectorAll('.card');
+let display = document.querySelector('#time');
+let twoMinutes = 120;
 let openCard = [];
 let moves = 0;
 
-//let counter = document.querySelector('.moves');
 const stars = document.querySelectorAll('.fa-star');
 let starsList = document.querySelectorAll('.stars li');
-//let matchedCards = document.getElementsByClassName("match");
 
-let timer;
+let timer = 0;
 let clockNotRunning = true;
 let timerId;
 
@@ -37,10 +37,36 @@ function countMoves() {
     const displayMoves = document.querySelector('.moves');
     displayMoves.innerHTML = moves;
 }
-
+//function stopClock instructed by Danny G. Smith
 function stopClock() {
     // must match variable for setInterval
+    clockNotRunning = true;
     clearInterval(timerId);
+}
+
+//displayTimer() and resetTimer() instructed by Danny G. Smith 7/29/18
+function displayTimer(timer) {
+    let minutes = parseInt(timer / 60, 10);
+    let seconds = parseInt(timer % 60, 10);
+
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    display.textContent = minutes + ':' + seconds;
+
+    if (--timer < 0) {
+        timer = duration;
+    }
+
+    return (timer);
+}
+
+function resetTimer(duration) {
+    let timer = duration;
+
+    timer = displayTimer(timer);
+
+    return (timer);
 }
 
 // https://questionfocus.com/the-simplest-possible-javascript-countdown-timer-closed.html
@@ -58,7 +84,9 @@ function startTimer(duration, display) {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         seconds = seconds < 10 ? '0' + seconds : seconds;
 
-        display.textContent = minutes + ':' + seconds;
+        if (!clockNotRunning) {
+            display.textContent = minutes + ':' + seconds;
+        }
 
         if (--timer < 0) {
             timer = duration;
@@ -83,7 +111,8 @@ function startTimer(duration, display) {
 }
 
 //array created, for loop over the cards to add an event listener to each
-//code lines XX-XX instructed by Danny G. Smith, midwest cohort meeting
+//for loop event listener code instructed by Danny G. Smith, midwest cohort meeting
+//additional clock stop code instruction from Carlos Fins 7/28/2018 Slack Study Jam
 for (let index = 0; index < cards.length; index++) {
 
     cards[index].addEventListener('click', function () {
@@ -91,11 +120,9 @@ for (let index = 0; index < cards.length; index++) {
             let twoMinutes = 60 * 2,
                 display = document.querySelector('#time');
 
-            // global variable used to guarantee startTimer is only called once
             if (clockNotRunning) {
                 startTimer(twoMinutes, display);
                 clockNotRunning = false;
-                //displayDuration();
             }
 
             // filter out the card if it matches itself
@@ -144,7 +171,6 @@ for (let index = 0; index < cards.length; index++) {
                     } // equal 2
                 } // less than 2
             } // does it match itself
-
         } // click event
     );
 }
@@ -165,20 +191,14 @@ function shuffle(array) {
     return array;
 }
 
-//moveCounter code 
-
 //initGame code from 1:1 with Iip 7/8/18
 initGame();
 
 function initGame() {
     let newCards = shuffle(cardArray);
-    let stars = 3;
-    let moves = 0;
-    let clockNotRunning = true;
     cards.forEach(function (element, index) {
         cards[index].className = 'card';
         cards[index].firstElementChild.className = newCards[index];
-        //startTimer();
     });
 }
 
@@ -198,63 +218,73 @@ function awardStars() {
         }
     }
 }
-/*
 
-//reset timer
-second = 0;
-minute = 0;
-hour = 0;
-//var timer = document.querySelector(".timer");
-startTimer(twoMinutes, display);
-timer.innerHTML(timerId);
-
-/*
-// @description congratulations when all cards match, show modal and moves, time and rating
-//https://github.com/sandraisrael/Memory-Game-fend/blob/master/js/app.js
-function congratulations() {
-    if (matchedCard.length == 16) {
-        clearInterval(interval);
-        finalTime = timer.innerHTML;
-
-        // show congratulations modal
-        modal.classList.add("show");
-
-        // declare star rating variable
-        var starRating = document.querySelector(".stars").innerHTML;
-
-        //showing move, rating, time on modal
-        document.getElementById("finalMove").innerHTML = moves;
-        document.getElementById("starRating").innerHTML = starRating;
-        document.getElementById("totalTime").innerHTML = finalTime;
-
-        //closeIcon on modal
-        closeModal();
-    };
+//reset game adapted from Matt Cranford and Sandra Israel
+function resetMoves() {
+    moves = 0;
+    document.querySelector('.moves').innerHTML = moves;
 }
 
+function resetStars() {
+    for (let i = 0; i < stars.length; i++) {
+        stars[i].style.color = "FFD700";
+        stars[i].style.visibility = "visible";
+    }
+}
 
-// @description close icon on modal
+function resetGame() {
+    resetMoves();
+    resetStars();
+    stopClock();
+    resetTimer(twoMinutes);
+    //startTimer(twoMinutes, display);
+    initGame();
+}
+
+document.querySelector('.restart').addEventListener('click', resetGame);
+
+function displayDiffOnModal(timer) {
+    let theDuration = document.getElementById('time');
+    let currentTime = minutes * 60 + seconds;
+    let diffTime, diffMinutes, diffSeconds;
+    diffTime = twoMinutes - currentTime;
+
+    //console.log(currentTime, diffTime);
+
+    diffMinutes = parseInt(diffTime / 60, 10);
+    diffSeconds = parseInt(diffTime % 60, 10);
+
+    diffMinutes = diffMinutes < 10 ? '0' + diffMinutes : diffMinutes;
+    diffSeconds = diffSeconds < 10 ? '0' + diffSeconds : diffSeconds;
+
+    theDuration.textContent = diffMinutes + ':' + diffSeconds;
+
+    return (timer);
+}
+
+//function for open modal
+//code created/instructed by Sachin Sharma https://gist.github.com/lestec/b43ec984b8027ddec21d3c7015068622
+function openModal() {
+    let modalContent = document.querySelector("#modalContent");
+    modalContent.openModal();
+}
+
+//function for close icon
+//code created/instructed by Sachin Sharma https://gist.github.com/lestec/b43ec984b8027ddec21d3c7015068622
 function closeModal() {
-    closeIcon.addEventListener("click", function (e) {
-        modal.classList.remove("show");
-        startGame();
-    });
+    let modalContent = document.querySelector("#modalContent");
+    modalContent.closest();
 }
 
 // @description for user to play Again 
 function playAgain() {
     modal.classList.remove("show");
-    startGame();
+    initGame();
 }
+/*
+document.querySelector('.play-again').addEventListener('click', playAgain);
+document.querySelector('.restart').addEventListener('click', closeModal);
 
-
-//for reset game make sure to set sec and moves to 0, how to account for stars?
-/*function isOver() {
-    let sec = 0;
-    if (matchedCards.length === cards.length) {
-        alert(`CONGRATULATIONS, you won! Play again? You earned ${countStars} stars for ${moves} moves ${allSeconds} seconds. Can you improve your game?!`);
-    }
-}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

@@ -11,8 +11,28 @@
 </head>
 
 <body>
+    <!--modal instruction from Sachin Sharma https://gist.github.com/lestec/b43ec984b8027ddec21d3c7015068622-->
+    <dialog id="modalContent">
+    <div>
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h4>CONGRATULATIONS!</h4>
+        <p>You won the game in ???</p>
+        <!--->need to give the parent a *position: relative* style, Chris N slack -->
+       
+<!--                <div class="content-2">
+                    <span class="modal-time">Time: </span>
+                    <span class="modal-stars">Stars: </span>
+                    <span class="modal-moves">Moves: </span>
+                </div>
+                <button id="play-again" onclick="playAgain()">
+                    Play again?
+                </button>-->
+    </div>
+    </dialog>
 
-    <span class="container">
+    <input type="button" onclick="openModal()" value="Open Modal"/>
+
+    <div class="container">
         <header>
             <h1>Matching Game</h1>
         </header>
@@ -36,7 +56,7 @@
             <!--used to test the elapsed time-->
             <!--<span id="theDuration" class="clock values">2:00</span>-->
 
-            <div class="restart" onclick=initGame()>
+            <div class="restart" onclick=resetGame()>
                 <i class="fa fa-repeat"></i>
 
             </div>
@@ -93,31 +113,10 @@
             </li>
         </ul>
         <!--https://github.com/sandraisrael/Memory-Game-fend/blob/master/index.html-->
-        <div id="popup1" class="overlay">
-            <div class="popup">
-                <h2>Congratulations 🎉</h2>
-                <a class="close" href=#>×</a>
-                <div class="content-1">
-                    Congratulations you're a winner 🎉🎉
-                </div>
-                <div class="content-2">
-                    <p>You made
-                        <span id=finalMove> </span> moves </p>
-                    <p>in
-                        <span id=totalTime> </span>
-                    </p>
-                    <p>Rating:
-                        <span id=starRating></span>
-                    </p>
-                </div>
-                <button id="play-again" onclick="playAgain()">
-                    Play again 😄</a>
-                </button>
-            </div>
-        </div>
-        </div>
 
-        <script src="js/app.js"></script>
+    </div>
+
+    <script src="js/app.js"></script>
 </body>
 
 </html>

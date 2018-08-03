@@ -119,47 +119,67 @@ h1 {
     cursor: pointer;
 }
 
+#modalContent {
+    box-shadow: 0px 12px 12px 1px black;
+}
+
+*modalContent div {
+    height: 100px;
+    width: 500px;
+}
+
+.close {
+    float: right;
+    margin: -36px -6px 0px 0;
+    font-size: 36px;
+}
+
 /*
  * Styles for congratulations modal
  https: //github.com/sandraisrael/Memory-Game-fend/blob/master/css/app.css
  */
 
-.overlay {
-    position: fixed;
+/*
+.modal-background {
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.440);
     transition: opacity 500ms;
-    visibility: hidden;
+    /*visibility: hidden;
     opacity: 0;
 }
-
-.overlay:target {
+/*
+.modal:target {
     visibility: visible;
     opacity: 1;
 }
-
 .popup {
-    margin: 70px auto;
-    padding: 20px;
+    left: 50%;
+    /*padding: 20px;*
     background: #ffffff;
-    border-radius: 5px;
-    width: 85%;
+    width: 400px;
     position: relative;
-    transition: all 5s ease-in-out;
-    font-family: 'Gloria Hallelujah', cursive;
+    top: 50%;
+    /*transition: all 5s ease-in-out;*
+    transform: translate(-50%, -70%);
 }
 
 .popup h2 {
+    display: flex;
+    border-bottom: 1px solid gray;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 0;
+    padding: 0 1.5rem;
     color: #333;
-    font-family: Tahoma, Arial, sans-serif;
 }
 
 .popup .close {
-    position: absolute;
+    display: none;
+    /*position: absolute;
     top: 20px;
     right: 30px;
     transition: all 200ms;
@@ -168,11 +188,13 @@ h1 {
     text-decoration: none;
     color: #333;
 }
+*/
 
-.popup .close:hover {
-    color: #E5F720;
+.close:hover {
+    color: yellow;
 }
 
+/*
 .popup .content-1,
 .content-2 {
     max-height: 30%;
@@ -188,6 +210,7 @@ h1 {
 #starRating li {
     display: inline-block;
 }
+*/
 
 #play-again {
     background-color: #141214;
@@ -196,7 +219,6 @@ h1 {
     display: block;
     margin: 0 auto;
     width: 50%;
-    font-family: 'Gloria Hallelujah', cursive;
     color: #ffffff;
     border-radius: 5px;
 }
