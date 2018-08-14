@@ -1,9 +1,15 @@
 # Memory Game Project
 
+## Thank You!
+
+A sincere thank you to all of the individuals who assisted me with this challenging project, I would never have completed it or learned so much without you. I have attributed code written and instructed by others. June 26, 2018 through August 14, 2018
+
+Below is the instruction from Udacity to the student for project initiation.
+
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+- [Instructions](#instructions)
+- [Contributing](#contributing)
 
 ## Instructions
 

@@ -4,10 +4,6 @@
 <head>
     <meta charset="utf-8">
     <title>Memory Matching Game</title>
-    <!--<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="HandheldFriendly" content="true">
-    <meta name="description" content="">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
@@ -17,6 +13,7 @@
 <body>
     <div id="win-modal">
         <h1 id=message>CONGRATULATIONS!</h1>
+        <a href="#" class="close-button"></a>
         <h1 id="numMoves"> Moves</h1>
         <h1 id="finalTime"></h1>
         <ul id="finalStars"></ul>
@@ -42,7 +39,7 @@
                     </ul>
                 </span>
 
-                <span id="moves">0</span> Moves</span>
+                <span id="moves">0</span>
                 <span>Time:
                     <span id="time">2:00</span>
                 </span>

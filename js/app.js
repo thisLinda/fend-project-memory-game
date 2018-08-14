@@ -41,7 +41,7 @@ document.getElementById("win-modal").style.display = "none";
 function countMoves() {
     moves++;
     const displayMoves = document.querySelector("#moves");
-    displayMoves.innerHTML = moves;
+    displayMoves.innerHTML = moves + " Moves";
 }
 
 //function stopClock instructed by Danny G. Smith
@@ -105,69 +105,67 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-//array created, for loop over the cards to add an event listener to each
 //for loop event listener code instructed by Danny G. Smith, midwest cohort meeting
 //additional clock stop code instruction from Carlos Fins 7/28/2018 Slack Study Jam
 for (let index = 0; index < cards.length; index++) {
 
     cards[index].addEventListener("click", function () {
 
-            let twoMinutes = 60 * 2,
-                display = document.querySelector("#time");
+        let twoMinutes = 60 * 2,
+            display = document.querySelector("#time");
 
-            if (clockNotRunning) {
-                startTimer(twoMinutes, display);
-                clockNotRunning = false;
-            }
+        if (clockNotRunning) {
+            startTimer(twoMinutes, display);
+            clockNotRunning = false;
+        }
 
-            // filter out the card if it matches itself
-            if (!cards[index].classList.contains("open") &&
-                !cards[index].classList.contains("show")) {
+        // filter out the card if it matches itself
+        if (!cards[index].classList.contains("open") &&
+            !cards[index].classList.contains("show")) {
 
-                // prevent more than two cards at a time
-                if (openCard.length < 2) {
-                    openCard.push(index);
+            // prevent more than two cards at a time
+            if (openCard.length < 2) {
+                openCard.push(index);
 
-                    cards[index].classList.add("open");
-                    cards[index].classList.add("show");
+                cards[index].classList.add("open");
+                cards[index].classList.add("show");
 
-                    if (openCard.length === 2) {
-                        countMoves();
+                if (openCard.length === 2) {
+                    countMoves();
 
-                        // todo write function to update moves
-                        // updateMoves();
-                        if (cards[openCard[0]].children[0].classList[1] ===
-                            cards[openCard[1]].children[0].classList[1]) {
+                    // todo write function to update moves
+                    // updateMoves();
+                    if (cards[openCard[0]].children[0].classList[1] ===
+                        cards[openCard[1]].children[0].classList[1]) {
+
+                        cards[openCard[0]].classList.remove("open", "show");
+                        cards[openCard[0]].classList.add("match");
+                        cards[openCard[1]].classList.remove("open", "show");
+                        cards[openCard[1]].classList.add("match");
+
+                        // verify it is time to stop clock
+                        if (document.querySelectorAll(".match").length === 16) {
+                            stopClock();
+                            awardStars();
+                            gameOver();
+                        }
+
+                        openCard = [];
+                    } else {
+                        setTimeout(function () {
 
                             cards[openCard[0]].classList.remove("open", "show");
-                            cards[openCard[0]].classList.add("match");
+                            // updateScore();
                             cards[openCard[1]].classList.remove("open", "show");
-                            cards[openCard[1]].classList.add("match");
-
-                            // verify it is time to stop clock
-                            if (document.querySelectorAll(".match").length === 16) {
-                                stopClock();
-                                awardStars();
-                                gameOver();
-                            }
 
                             openCard = [];
-                        } else {
-                            setTimeout(function () {
 
-                                cards[openCard[0]].classList.remove("open", "show");
-                                // updateScore();
-                                cards[openCard[1]].classList.remove("open", "show");
-
-                                openCard = [];
-
-                            }, 600); // timeout
-                        }
-                    } // equal 2
-                } // less than 2
-            } // does it match itself
-        } // click event
-    );
+                        }, 600);
+                    }
+                }
+            }
+        }
+    });
 }
 
 //Shuffle function from http://stackoverflow.com/a/2450976
@@ -231,6 +229,8 @@ document.querySelector("#restart").addEventListener("click", resetGame);
 
 document.querySelector("#win-modal button").addEventListener("click", resetGame);
 
+document.querySelector(".close-button").addEventListener("click", resetGame);
+
 function resetGame() {
     document.getElementById("win-modal").style.display = "none";
     resetMoves();
@@ -279,14 +279,3 @@ function gameOver() {
     document.getElementById("finalStars").innerHTML = finalStars;
     displayDiffOnModal(timer);
 };
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
