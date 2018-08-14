@@ -6,7 +6,7 @@ This memory matching game is simple to play (but was DIFFICULT to code for a nov
 
 ## Thank You!
 
-A sincere thank you to all of the individuals who assisted me with this challenging project, I would never have completed it or learned so much without you. I have attributed code written and instructed by others. June 26, 2018 through August 14, 2018
+A sincere thank you to all of the individuals who assisted me with this challenging project, I would never have completed it or learned so much without you. I have attributed code written and instructed by others. June 19, 2018 through August 14, 2018
 
 Below is the instruction from Udacity to the student for project initiation.
 
