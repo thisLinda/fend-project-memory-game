@@ -3,64 +3,55 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Matching Game</title>
-    <meta name="description" content="">
+    <title>Memory Matching Game</title>
+    <!--<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="description" content="">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
-    <!--modal instruction from Sachin Sharma https://gist.github.com/lestec/b43ec984b8027ddec21d3c7015068622-->
-    <dialog id="modalContent">
-    <div>
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h4>CONGRATULATIONS!</h4>
-        <p>You won the game in ???</p>
-        <!--->need to give the parent a *position: relative* style, Chris N slack -->
-       
-<!--                <div class="content-2">
-                    <span class="modal-time">Time: </span>
-                    <span class="modal-stars">Stars: </span>
-                    <span class="modal-moves">Moves: </span>
-                </div>
-                <button id="play-again" onclick="playAgain()">
-                    Play again?
-                </button>-->
+    <div id="win-modal">
+        <h1 id=message>CONGRATULATIONS!</h1>
+        <h1 id="numMoves"> Moves</h1>
+        <h1 id="finalTime"></h1>
+        <ul id="finalStars"></ul>
+        <button id="play-again">Play Again?</button>
     </div>
-    </dialog>
-
-    <input type="button" onclick="openModal()" value="Open Modal"/>
 
     <div class="container">
         <header>
-            <h1>Matching Game</h1>
+            <h1>Memory Matching Game</h1>
+
+            <section class="score-panel">
+                <span>
+                    <ul class="stars">
+                        <li>
+                            <i class="fa fa-star"></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-star"></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-star"></i>
+                        </li>
+                    </ul>
+                </span>
+
+                <span id="moves">0</span> Moves</span>
+                <span>Time:
+                    <span id="time">2:00</span>
+                </span>
+                <span id="restart" onclick=resetGame()>
+                    <i class="fa fa-repeat"></i>
+                </span>
+            </section>
+
         </header>
-
-        <section class="score-panel">
-            <ul class="stars">
-                <li>
-                    <i class="fa fa-star"></i>
-                </li>
-                <li>
-                    <i class="fa fa-star"></i>
-                </li>
-                <li>
-                    <i class="fa fa-star"></i>
-                </li>
-            </ul>
-
-            <span class="moves">0</span> Moves
-
-            <span id="time" class="clock values">2:00</span>
-            <!--used to test the elapsed time-->
-            <!--<span id="theDuration" class="clock values">2:00</span>-->
-
-            <div class="restart" onclick=resetGame()>
-                <i class="fa fa-repeat"></i>
-
-            </div>
-        </section>
 
         <ul class="deck" id="eachCard">
             <li class="card">
@@ -112,7 +103,6 @@
                 <i class="fa fa-cube"></i>
             </li>
         </ul>
-        <!--https://github.com/sandraisrael/Memory-Game-fend/blob/master/index.html-->
 
     </div>
 
